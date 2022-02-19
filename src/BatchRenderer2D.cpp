@@ -9,6 +9,11 @@ BatchRenderer2D::~BatchRenderer2D() {
 }
 
 void BatchRenderer2D::init() {
+	// VBO - Vertex Buffer Object, used to store all the vertices we want to draw
+	glColor3f(0.0, 0.0, 0.0);
+	glPointSize(5);
+
+
 	glGenVertexArrays(1, &VAO);	
 	glGenBuffers(1, &VBO);
 	
@@ -71,9 +76,28 @@ void BatchRenderer2D::submit(const Renderable2D* renderable) {
 	normal.y /= c;
 	normal.z /= c;
 
-	const float d = 324.95f;
+	//const float d = 324.95f;
 
 	if (vec3::DotProduct(vec3(0, 0, 0), normal) < 1.0f) { 
+
+		// Draw some vertices on top
+		glPointSize(6.0f);            
+               	glBegin(GL_POINTS);
+                glVertex3f(positionA.x, positionA.y, positionA.z);
+                glVertex3f(positionB.x, positionB.y, positionB.z);
+                glVertex3f(positionC.x, positionC.y, positionC.z);
+                glColor3f(1, 1, 1);
+		glEnd();	
+
+		// Draw some lines on top
+		glBegin(GL_LINES);
+		glVertex3f(positionA.x, positionA.y, positionA.z);
+		glVertex3f(positionB.x, positionB.y, positionB.z);
+		glVertex3f(positionC.x, positionC.y, positionC.z);
+		glVertex3f(positionA.x, positionA.y, positionA.z);
+                glColor3f(1, 1, 1);
+		glEnd();	
+		
 		m_Buffer->vertex	= positionA;
 		m_Buffer->color		= color;
 		m_Buffer++;	
@@ -86,25 +110,6 @@ void BatchRenderer2D::submit(const Renderable2D* renderable) {
 		m_Buffer->color		= color;
 		m_Buffer++;	
 
-		
-		
-		// Draw some vertices on top
-		glPointSize(4.4f);            
-                glBegin(GL_POINTS);
-                //glColor3f(0.75f, 0.62f, 0.2f);
-                glVertex3f(positionA.x, positionA.y, positionA.z);
-                glVertex3f(positionB.x, positionB.y, positionB.z);
-                glVertex3f(positionC.x, positionC.y, positionC.z);
-		glEnd();	
-
-		// Draw some lines on top
-		glBegin(GL_LINES);
-                //glColor3f(0.75f, 0.75f, 0.75f);
-		glVertex3f(positionA.x, positionA.y, positionA.z);
-		glVertex3f(positionB.x, positionB.y, positionB.z);
-		glVertex3f(positionC.x, positionC.y, positionC.z);
-		glVertex3f(positionA.x, positionA.y, positionA.z);
-		glEnd();	
         
 		IndexCount += 3;
 	}

@@ -16,7 +16,7 @@
 #include "vec3.h"
 #include "vec4.h"
 
-// Shader 
+// Renderers
 #include "Shader.h"
 #include "BatchRenderer2D.h"
 #include "sprite.h"
@@ -25,14 +25,12 @@
 #include "Buffer.h"
 #include "VertexArray.h"
 #include "IndexBuffer.h"
+#include "tilelayer.h"
+#include "Layer.h"
 
 // Example Shapes
 #include "Icosahedron.h"
-
-
-int arr_length(int* arr) {
-	return sizeof(arr) / sizeof(arr[0]); 
-}
+#include "map.h"
 
 
 
