@@ -84,7 +84,11 @@ void Window::getMousePosition(float &x, float &y) const {
 
 
 void Window::clear() const {
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Change me if needed
+	if (!state_flag)
+		glClearColor(default_color.x, default_color.y, default_color.z, default_color.w); // Change me if needed
+	else 
+		glClearColor(wireframe_color.x, wireframe_color.y, wireframe_color.z, wireframe_color.w); // Change me if needed
+		
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
@@ -116,3 +120,5 @@ void cursor_position_callback(GLFWwindow *w_window, double xpos, double ypos) {
 	win->x_mouse_pos = xpos;	
 	win->y_mouse_pos = ypos;	
 }
+
+

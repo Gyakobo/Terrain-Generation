@@ -26,6 +26,9 @@
 #include "VertexArray.h"
 #include "IndexBuffer.h"
 
+// Example Shapes
+#include "Icosahedron.h"
+
 
 int arr_length(int* arr) {
 	return sizeof(arr) / sizeof(arr[0]); 

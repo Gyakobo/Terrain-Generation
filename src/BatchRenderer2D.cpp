@@ -71,6 +71,8 @@ void BatchRenderer2D::submit(const Renderable2D* renderable) {
 	normal.y /= c;
 	normal.z /= c;
 
+	const float d = 324.95f;
+
 	if (vec3::DotProduct(vec3(0, 0, 0), normal) < 1.0f) { 
 		m_Buffer->vertex	= positionA;
 		m_Buffer->color		= color;
@@ -83,6 +85,26 @@ void BatchRenderer2D::submit(const Renderable2D* renderable) {
 		m_Buffer->vertex	= positionC;
 		m_Buffer->color		= color;
 		m_Buffer++;	
+
+		
+		
+		// Draw some vertices on top
+		glPointSize(4.4f);            
+                glBegin(GL_POINTS);
+                //glColor3f(0.75f, 0.62f, 0.2f);
+                glVertex3f(positionA.x, positionA.y, positionA.z);
+                glVertex3f(positionB.x, positionB.y, positionB.z);
+                glVertex3f(positionC.x, positionC.y, positionC.z);
+		glEnd();	
+
+		// Draw some lines on top
+		glBegin(GL_LINES);
+                //glColor3f(0.75f, 0.75f, 0.75f);
+		glVertex3f(positionA.x, positionA.y, positionA.z);
+		glVertex3f(positionB.x, positionB.y, positionB.z);
+		glVertex3f(positionC.x, positionC.y, positionC.z);
+		glVertex3f(positionA.x, positionA.y, positionA.z);
+		glEnd();	
         
 		IndexCount += 3;
 	}
