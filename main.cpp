@@ -9,21 +9,16 @@ int main() {
 	Window window("Mexil", 900, 900);	
 
 	// perspective(float fov, float aspectRatio, float near, float far) // Reference
-	mat4 pers = mat4::perspective(90.0f, window.getWidth()/window.getHeight(), 0.0f, -100.0f);
+	//mat4 pers = mat4::perspective(120.0f, window.getWidth()/window.getHeight(), 0.0f, -100.0f);
 
 	Shader shader("shaders/vertex_shader.glsl", "shaders/fragment_shader.glsl");
 	shader.enable();
-	shader.setUniformMat4("ml_matrix", mat4::translation(vec3(1.5f, 0.0f, -2.5f)));
+	shader.setUniformMat4("ml_matrix", mat4::translation(vec3(0.0f, 0.35f, -4.5f)));
 
-	Shader shader1("shaders/vertex_shader.glsl", "shaders/fragment_shader.glsl");
-	shader1.enable();
-	shader1.setUniformMat4("ml_matrix", mat4::translation(vec3(-1.5f, 0.0f, -2.5f)));
-
-	Shader shader2("shaders/vertex_shader.glsl", "shaders/fragment_shader.glsl");
-	shader2.enable();
-	shader2.setUniformMat4("ml_matrix", mat4::translation(vec3(0.0f, 0.0f, -2.5f)));
+	Shader mapShader("shaders/vertex_shader.glsl", "shaders/fragment_shader.glsl");
+	mapShader.enable();
+	mapShader.setUniformMat4("ml_matrix", mat4::translation(vec3(0.3f, -0.6f, -0.1f)));
 	
-
 	// Very important, do not touch
 	glEnable(GL_DEPTH_TEST); // Gives us true 3d
 	
@@ -39,34 +34,28 @@ int main() {
 
 	Icosahedron icosahedron;
 	Icosahedron icosahedron1;
+	Map sample_map;
 	
 	// First object with "shader"
 	TileLayer layer(&shader);
-	icosahedron.set_size(1.4f);
+	icosahedron.set_size(4.5f);
 	vector<Renderable2D*> IcosahedronFaces = icosahedron.getRenderables();
 	for (int i=0; i<IcosahedronFaces.size(); i++) layer.add(IcosahedronFaces.at(i));
 	////////////////////////////
 
-	// Second object with "shader1"
-	TileLayer layer1(&shader1);
-	icosahedron1.set_size(1.4f);
-	vector<Renderable2D*> IcosahedronFaces1 = icosahedron1.getRenderables();
-	for (int i=0; i<IcosahedronFaces1.size(); i++) layer1.add(IcosahedronFaces1.at(i));
-	////////////////////////////
 
 	// Second object with "shader2"
-	//TileLayer layer1(&shader2);
-	//vector<Renderable2D*> IcosahedronFaces2 = icosahedron1.getRenderables();
-	//for (int i=0; i<IcosahedronFaces1.size(); i++) layer1.add(IcosahedronFaces1.at(i));
+	TileLayer mapLayer(&mapShader);
+	vector<Renderable2D*> mapFaces = sample_map.getRenderables();
+	for (int i=0; i<mapFaces.size(); i++) mapLayer.add(mapFaces.at(i));
 	////////////////////////////
 
 	float x, y, angle_y = 0.0f, angle_x = 0.0f;
 
-	//Line line(vec3(0, 0, 0), vec3(1, 1, 0));
-	//line.setColor(vec3(1, 1, 1));
-
 	while(!window.closed()) {
 		window.clear();
+
+		shader.enable();
 
 		if (window.isKeyPressed(GLFW_KEY_DOWN)) angle_y		-= 2.5f;
 		if (window.isKeyPressed(GLFW_KEY_UP)) angle_y		+= 2.5f;
@@ -94,7 +83,7 @@ int main() {
 		window.getMousePosition(x, y);
 
 		layer.render();	
-		layer1.render();
+		mapLayer.render();
 
 		window.update();
 	}

@@ -1,5 +1,7 @@
 #include "../headers/BatchRenderer2D.h"
 
+//BatchRenderer2D::wire_frame = false;
+
 BatchRenderer2D::BatchRenderer2D() {
 	init();
 }
@@ -79,7 +81,6 @@ void BatchRenderer2D::submit(const Renderable2D* renderable) {
 	//const float d = 324.95f;
 
 	if (vec3::DotProduct(vec3(0, 0, 0), normal) < 1.0f) { 
-
 		// Draw some vertices on top
 		glPointSize(6.0f);            
                	glBegin(GL_POINTS);
@@ -88,7 +89,7 @@ void BatchRenderer2D::submit(const Renderable2D* renderable) {
                 glVertex3f(positionC.x, positionC.y, positionC.z);
                 glColor3f(1, 1, 1);
 		glEnd();	
-
+                
 		// Draw some lines on top
 		glBegin(GL_LINES);
 		glVertex3f(positionA.x, positionA.y, positionA.z);
@@ -96,7 +97,7 @@ void BatchRenderer2D::submit(const Renderable2D* renderable) {
 		glVertex3f(positionC.x, positionC.y, positionC.z);
 		glVertex3f(positionA.x, positionA.y, positionA.z);
                 glColor3f(1, 1, 1);
-		glEnd();	
+		glEnd();
 		
 		m_Buffer->vertex	= positionA;
 		m_Buffer->color		= color;
