@@ -1,9 +1,28 @@
 #version 330 core
-#include hg_sdf.glsl
+//#extension GL_ARB_shading_language_include : require 
+//#include hg_sdf.glsl 			// Doesn't work
 
-layout (location = 0) out vec4 fragColor;
+layout (location = 0) out vec4 color;
 
-uniform vec2 u_resolution;
+uniform vec4 colour;
+
+in DATA {
+	vec4 position;
+	vec4 color;
+} fragment_in;
+
+
+
+
+
+
+
+#define PI 3.14159265
+#define TAU (2*PI)
+#define PHI (sqrt(5)*0.5 + 0.5)
+
+
+/*uniform vec2 u_resolution;
 
 const float FOV		= 1.0;
 const int MAX_STEPS	= 256;
@@ -29,7 +48,7 @@ vec2 rayMarch(vec3 ro, vec3 rd) {
 		vec3 p = ro + object.x * rd;
 		hit = map(p);
 		object.x += hit.x;
-		object.y += hit.y;
+		object.y = hit.y;
 		if (abs(hit.x) < EPSILON || object.x > MAX_DIST) break;	
 	}
 	return object;
@@ -47,13 +66,23 @@ void render(inout vec3 col, in vec2 uv) {
 	if (object.x < MAX_DIST) {
 		col += 3.0 / object.x;
 	}
-}
+}*/
  
 void main() {
-	vec2 uv = (2.0 * gl_FragCoord.xy - u_resolution.xy) / u_resolution.y;	
-
+	/*vec2 uv = (2.0 * gl_FragCoord.xy - u_resolution.xy) / u_resolution.y;	
 	vec3 col;
 	render(col, uv);
+	color = vec4(col, 1.0);*/
 	
-	fragColor = vec4(col, 1.0);
+	//color = colour;
+	color = fragment_in.color;
 }
+
+
+
+
+
+
+
+
+
