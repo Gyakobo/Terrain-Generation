@@ -4,6 +4,10 @@
 #include <iostream>
 #include "Renderer2D.h"
 #include "IndexBuffer.h"
+#include "Shader.h"
+
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
 #include "vec2.h"
 #include "vec3.h"

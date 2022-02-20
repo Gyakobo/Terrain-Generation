@@ -46,7 +46,6 @@ vec3& vec3::divide(const vec3& other) {
 
 
 
-
 vec3& operator+(vec3 left, const vec3& right) {
 	return left.add(right);
 }

@@ -15,13 +15,13 @@ using namespace std;
 class Shader {
 private:
 	GLuint load();	
-	const char *VertPath, *FragPath;
+	const char *VertPath, *FragPath, *GeoPath;
 
 	GLint getUniformLocation(const GLchar* name);
 	
 public:
 	GLuint ShaderID;
-	Shader(const char* vertPath, const char* fragPath);
+	Shader(const char* vertPath, const char* fragPath, const char* geoPath);
 	~Shader();
 
 

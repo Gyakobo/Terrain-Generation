@@ -13,8 +13,8 @@ using namespace std;
 
 class Window {
 private:
-	const vec4 default_color = vec4(0.75f, 0.75f, 0.75f, 0.75f);
-	//const vec4 default_color = vec3(0.58f, 0.58f, 0.58f, 1.0f);
+	//const vec4 default_color = vec4(0.75f, 0.75f, 0.75f, 0.75f);
+	const vec4 default_color = vec4(0.58f, 0.58f, 0.58f, 0.002f);
 	const vec4 wireframe_color = vec4(0.07f, 0.13f, 0.17f, 1.0f);
 
 	bool state_flag = false; 

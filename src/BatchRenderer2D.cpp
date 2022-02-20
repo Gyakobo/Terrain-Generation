@@ -12,9 +12,6 @@ BatchRenderer2D::~BatchRenderer2D() {
 
 void BatchRenderer2D::init() {
 	// VBO - Vertex Buffer Object, used to store all the vertices we want to draw
-	glColor3f(0.0, 0.0, 0.0);
-	glPointSize(5);
-
 
 	glGenVertexArrays(1, &VAO);	
 	glGenBuffers(1, &VBO);
@@ -22,8 +19,12 @@ void BatchRenderer2D::init() {
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
-	glEnableVertexAttribArray(SHADER_VERTEX_INDEX);
-	glEnableVertexAttribArray(SHADER_COLOR_INDEX);
+
+
+	glEnableVertexAttribArray(SHADER_VERTEX_INDEX);	// layout 0, this is for face formation
+	glEnableVertexAttribArray(SHADER_COLOR_INDEX);	// layout 1, this is for face formation
+
+
 	glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, VERTEX_SIZE, (const GLvoid*) 0);
 	glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_FLOAT, GL_FALSE, VERTEX_SIZE, (const GLvoid*) (3 * sizeof(GLfloat)));
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -73,6 +74,7 @@ void BatchRenderer2D::submit(const Renderable2D* renderable) {
 	line2.z = positionC.z - positionB.z;
 
 	vec3 normal = vec3::CrossProduct(line1, line2); 
+	vec3 poniter = vec3::CrossProduct(line1, line2); 
 	float c = sqrt(normal.x*normal.x + normal.y*normal.y + normal.z*normal.z);
 	normal.x /= c; 
 	normal.y /= c;
@@ -80,25 +82,7 @@ void BatchRenderer2D::submit(const Renderable2D* renderable) {
 
 	//const float d = 324.95f;
 
-	if (vec3::DotProduct(vec3(0, 0, 0), normal) < 1.0f) { 
-		// Draw some vertices on top
-		glPointSize(6.0f);            
-               	glBegin(GL_POINTS);
-                glVertex3f(positionA.x, positionA.y, positionA.z);
-                glVertex3f(positionB.x, positionB.y, positionB.z);
-                glVertex3f(positionC.x, positionC.y, positionC.z);
-                glColor3f(1, 1, 1);
-		glEnd();	
-                
-		// Draw some lines on top
-		glBegin(GL_LINES);
-		glVertex3f(positionA.x, positionA.y, positionA.z);
-		glVertex3f(positionB.x, positionB.y, positionB.z);
-		glVertex3f(positionC.x, positionC.y, positionC.z);
-		glVertex3f(positionA.x, positionA.y, positionA.z);
-                glColor3f(1, 1, 1);
-		glEnd();
-		
+	//if (vec3::DotProduct(vec3(0, 0, 0), normal) < 1.0f) { 
 		m_Buffer->vertex	= positionA;
 		m_Buffer->color		= color;
 		m_Buffer++;	
@@ -113,7 +97,7 @@ void BatchRenderer2D::submit(const Renderable2D* renderable) {
 
         
 		IndexCount += 3;
-	}
+	//}
 }
 
 
@@ -131,6 +115,11 @@ void BatchRenderer2D::flush() {
 	glBindVertexArray(0); 
 	IndexCount = 0; 
 } 
+
+
+
+
+
 
 
 

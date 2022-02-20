@@ -32,6 +32,4 @@
 #include "Icosahedron.h"
 #include "map.h"
 
-
-
 #endif

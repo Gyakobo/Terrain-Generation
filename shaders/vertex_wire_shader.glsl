@@ -13,7 +13,7 @@ uniform mat4 rt_matrix_y = mat4(1.0); 	// rotation matrix
 
 out DATA {
 	//vec4 position; // Well kind of not needed right now
-	vec4 color;	
+	//vec4 color;	
 	mat4 pr_matrix;
 } vertex_out;
 
@@ -22,6 +22,10 @@ void main() {
 	gl_Position = ml_matrix * vw_matrix * rt_matrix_x * rt_matrix_y * position;
 	
 	//vertex_out.position =  ml_matrix * vw_matrix * rt_matrix_x * rt_matrix_y * position;
-	vertex_out.color = in_color; // Still deciding how to exploit this shenanegan
+	//vertex_out.color = in_color; // Still deciding how to exploit this shenanegan
 	vertex_out.pr_matrix = pr_matrix;
 }
+
+
+
+
