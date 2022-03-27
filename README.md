@@ -1,4 +1,4 @@
-># The Mexil Engine (In honour of Mathew Exil) 
+># The new and improved Viron Engine! 
 
 ## Simuliating a virus shell assembly
 
