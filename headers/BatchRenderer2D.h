@@ -13,7 +13,7 @@
 #include "vec3.h"
 #include "vec4.h"
 
-#define MAX_SPRITES	10000 // No need to for a lot of sprites
+#define MAX_SPRITES	20000 // No need to for a lot of sprites
 #define VERTEX_SIZE 	sizeof(VertexData)
 //#define SPRITE_SIZE	VERTEX_SIZE * 4 
 #define SPRITE_SIZE	VERTEX_SIZE * 3 // Basically a sprite would have like 3 sides ain't it  
@@ -23,6 +23,7 @@
 
 #define SHADER_VERTEX_INDEX	0 
 #define SHADER_COLOR_INDEX	1 
+#define SHADER_NORMAL_INDEX	2 
 
 #define PI 3.14159
 

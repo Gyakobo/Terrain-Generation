@@ -5,7 +5,7 @@
 }*/
 
 TileLayer::TileLayer(Shader* shader) 
-: Layer(new BatchRenderer2D(), shader, mat4::perspective(120.0f, 1, 0.0f, -100.0f)) {
+: Layer(new BatchRenderer2D(), shader, mat4::perspective(120.0f, 1, 0.1f, 100.0f)) {
 }
 
 TileLayer::~TileLayer() {

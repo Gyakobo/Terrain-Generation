@@ -21,6 +21,8 @@ Window::Window(const char *name, int width, int height) {
 
 
 Window::~Window() {
+	ImGui_ImplGlfwGL3_Shutdown();
+    ImGui::DestroyContext();
 	glfwTerminate();
 }
 
@@ -39,6 +41,11 @@ bool Window::init() {
 		cout << "Failed to Open Window" << endl;
 		return false;
 	}
+
+	ImGui::CreateContext();
+    ImGui_ImplGlfwGL3_Init(window, true);
+    ImGui::StyleColorsDark();
+
 	glfwMakeContextCurrent(window);
 	glfwSetWindowUserPointer(window, this);	
 	glfwSetWindowSizeCallback(window, WindowAdjust);
@@ -90,12 +97,17 @@ void Window::clear() const {
 		glClearColor(wireframe_color.x, wireframe_color.y, wireframe_color.z, wireframe_color.w); // Change me if needed
 		
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+	ImGui_ImplGlfwGL3_NewFrame();
 }
 
 
 void Window::update() {
-	glfwPollEvents();
+	ImGui::Render();
+    ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
+	
 	glfwSwapBuffers(window);
+	glfwPollEvents();
 }
 
 
@@ -120,5 +132,16 @@ void cursor_position_callback(GLFWwindow *w_window, double xpos, double ypos) {
 	win->x_mouse_pos = xpos;	
 	win->y_mouse_pos = ypos;	
 }
+
+void Window::RenderGUI(int *numb_face, float *strength, float *roughness, float *x_offset, float *y_offset, float *z_offset) {
+        ImGui::Text("Sides = %d", (*numb_face-1)*(*numb_face-1)*4);
+
+        ImGui::SliderInt("Resolution", numb_face, 2, 30); // Warning: Hard limit is 4 inclusive!
+        ImGui::SliderFloat("Strength", strength, 0.01f, 2.2f); // Warning: Hard limit is 4 inclusive!
+        ImGui::SliderFloat("Roughness", roughness, 0.0f, 2.0f); // Warning: Hard limit is 4 inclusive!
+        ImGui::SliderFloat("x_offset", x_offset, 0.0f, 4.0f); 
+        ImGui::SliderFloat("y_offset", y_offset, 0.0f, 4.0f); 
+        ImGui::SliderFloat("z_offset", z_offset, 0.0f, 4.0f); 
+} 
 
 

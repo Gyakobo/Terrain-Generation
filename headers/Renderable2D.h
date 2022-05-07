@@ -19,6 +19,7 @@ using namespace std;
 struct VertexData {
 	vec3 vertex;
 	vec4 color;
+	vec3 normal;
 };
 
 class Renderable2D {

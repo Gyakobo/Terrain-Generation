@@ -23,6 +23,10 @@ void Layer::add(Renderable2D* renderable) {
 	Renderables.push_back(renderable);
 }
 
+void Layer::clean_slate() {
+	Renderables = {};
+}
+
 void Layer::render() {
 	m_Shader->enable();
 	Renderer->begin();

@@ -12,16 +12,16 @@ GLuint Shader::load() {
 	GLuint program = 		glCreateProgram();
 	GLuint vertex = 		glCreateShader(GL_VERTEX_SHADER);
 	GLuint fragment = 		glCreateShader(GL_FRAGMENT_SHADER);
-	GLuint geometry = 		glCreateShader(GL_GEOMETRY_SHADER);
+	//GLuint geometry = 		glCreateShader(GL_GEOMETRY_SHADER);
 
 
 	string vertSourceString = 	FileUtils::read_file(VertPath);
 	string fragSourceString = 	FileUtils::read_file(FragPath);
-	string geoSourceString = 	FileUtils::read_file(GeoPath);
+	//string geoSourceString = 	FileUtils::read_file(GeoPath);
 	
 	const char* vertSource = 	vertSourceString.c_str();
 	const char* fragSource = 	fragSourceString.c_str();
-	const char* geoSource = 	geoSourceString.c_str();
+	//const char* geoSource = 	geoSourceString.c_str();
 
 
 	glShaderSource(vertex, 1, &vertSource, NULL);
@@ -53,7 +53,7 @@ GLuint Shader::load() {
 	}
 
 
-	glShaderSource(geometry, 1, &geoSource, NULL);
+	/*glShaderSource(geometry, 1, &geoSource, NULL);
 	glCompileShader(geometry);
 	glGetShaderiv(geometry, GL_COMPILE_STATUS, &result);
 	if (result == GL_FALSE)	{
@@ -64,19 +64,19 @@ GLuint Shader::load() {
 		cout << "Failed to compile fragment shader" << endl << &error[0] << endl;
 		glDeleteShader(geometry);
 		return 0;
-	}
+	}*/
 
 
 	glAttachShader(program, vertex);
 	glAttachShader(program, fragment);
-	glAttachShader(program, geometry);
+	//glAttachShader(program, geometry);
 
 	glLinkProgram(program);
 	glValidateProgram(program);	
 
 	glDeleteShader(vertex);
 	glDeleteShader(fragment);
-	glDeleteShader(geometry);
+	//glDeleteShader(geometry);
 
 	return program;
 }
@@ -113,6 +113,7 @@ void Shader::setUniform4f(const GLchar* name, const vec4& vector) {
 void Shader::setUniformMat4(const GLchar* name, const mat4& matrix) {
 	glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, matrix.elements);
 }
+
 
 
 

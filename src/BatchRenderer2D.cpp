@@ -23,10 +23,12 @@ void BatchRenderer2D::init() {
 
 	glEnableVertexAttribArray(SHADER_VERTEX_INDEX);	// layout 0, this is for face formation
 	glEnableVertexAttribArray(SHADER_COLOR_INDEX);	// layout 1, this is for face formation
+	glEnableVertexAttribArray(SHADER_NORMAL_INDEX);	// layout 1, this is for face formation
 
 
 	glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, VERTEX_SIZE, (const GLvoid*) 0);
 	glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_FLOAT, GL_FALSE, VERTEX_SIZE, (const GLvoid*) (3 * sizeof(GLfloat)));
+	glVertexAttribPointer(SHADER_NORMAL_INDEX, 3, GL_FLOAT, GL_FALSE, VERTEX_SIZE, (const GLvoid*) (7 * sizeof(GLfloat))); //Added the NORMAL buffer
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	GLuint indices[INDICES_SIZE];
@@ -69,30 +71,30 @@ void BatchRenderer2D::submit(const Renderable2D* renderable) {
 	line1.y = positionB.y - positionA.y;
 	line1.z = positionB.z - positionA.z;
 	
-	line2.x = positionC.x - positionB.x;
-	line2.y = positionC.y - positionB.y;
-	line2.z = positionC.z - positionB.z;
+	line2.x = positionB.x - positionC.x;
+	line2.y = positionB.y - positionC.y;
+	line2.z = positionB.z - positionC.z;
 
 	vec3 normal = vec3::CrossProduct(line1, line2); 
-	vec3 poniter = vec3::CrossProduct(line1, line2); 
 	float c = sqrt(normal.x*normal.x + normal.y*normal.y + normal.z*normal.z);
 	normal.x /= c; 
 	normal.y /= c;
 	normal.z /= c;
 
-	//const float d = 324.95f;
-
 	//if (vec3::DotProduct(vec3(0, 0, 0), normal) < 1.0f) { 
 		m_Buffer->vertex	= positionA;
 		m_Buffer->color		= color;
+		m_Buffer->normal	= normal;
 		m_Buffer++;	
         
 		m_Buffer->vertex	= positionB; 
 		m_Buffer->color		= color;
+		m_Buffer->normal	= normal;
 		m_Buffer++;	
         
 		m_Buffer->vertex	= positionC;
 		m_Buffer->color		= color;
+		m_Buffer->normal	= normal;
 		m_Buffer++;	
 
         
