@@ -96,13 +96,11 @@ Terrain-Generation/
 
 ## Future Features
 
-Future Features
-
-    * [ ] Add support for advanced noise algorithms like Simplex or Worley noise
-    * [ ] Implement texture mapping for more detailed terrains
-    * [ ] Add water rendering with reflection/refraction effects
-    * [ ] Simulate dynamic lighting and shadows
-    * [ ] Support terrain export as heightmaps or 3D models
+    - [ ] Add support for advanced noise algorithms like Simplex or Worley noise
+    - [ ] Implement texture mapping for more detailed terrains
+    - [ ] Add water rendering with reflection/refraction effects
+    - [ ] Simulate dynamic lighting and shadows
+    - [ ] Support terrain export as heightmaps or 3D models
 
 ## License
 MIT
