@@ -49,7 +49,7 @@ sudo g++ -std=c++11 main.cpp src/*.cpp src/imgui/imgui.cpp src/imgui/imgui_impl_
 sudo ./main
 ```
 
-    - Alternatively, please just run the [build.sh](./build.sh) after you go it executable permissions: `sudo chmod +x build.sh`
+Alternatively, please just run the [build.sh](./build.sh) after you go it executable permissions: `sudo chmod +x build.sh`
 
 For Windows users you should just:
 
@@ -86,6 +86,16 @@ Terrain-Generation/
 ├── CMakeLists.txt      # Build configuration
 └── README.md           # Project documentation
 ```
+
+## Future Features
+
+Future Features
+
+    * [ ] Add support for advanced noise algorithms like Simplex or Worley noise
+    * [ ] Implement texture mapping for more detailed terrains
+    * [ ] Add water rendering with reflection/refraction effects
+    * [ ] Simulate dynamic lighting and shadows
+    * [ ] Support terrain export as heightmaps or 3D models
 
 ## License
 MIT
