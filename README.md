@@ -1,22 +1,91 @@
 # Terrain-Generation
 
-A procedural terrain generation project using Python. This repository implements noise-based algorithms to create visually appealing and realistic terrain maps. The project demonstrates concepts such as Perlin noise, fractals, and elevation mapping for use in simulations, games, and geospatial applications.
+A procedural terrain generation project built with **C++** and modern OpenGL. This repository implements noise-based algorithms and real-time rendering techniques to create realistic and visually stunning terrains. The project leverages **ImGUI** for an interactive user interface, **GLEW** for OpenGL extensions, and **GLSL** for shader-based rendering.
+
+---
 
 ## Features
 
-- **[Perlin Noise Implementation](https://en.wikipedia.org/wiki/Perlin_noise)**: Generates smooth, continuous noise for natural-looking terrain.
-- **Fractal Noise**: Enhances the realism of the terrain with multi-scale noise blending.
-- **[Height Mapping](https://en.wikipedia.org/wiki/Heightmap)**: Converts noise outputs into elevation levels for 3D visualizations.
-- **Customizable Parameters**: Control terrain properties like roughness, scale, and detail level.
-- **Visualization Tools**: Create 2D heatmaps and 3D plots of generated terrain.
+- **Noise-Based Terrain**: Implements Perlin or other procedural noise algorithms for smooth, natural terrains.
+- **Real-Time Rendering**: Powered by OpenGL and GLSL shaders for efficient 3D visualizations.
+- **Interactive Controls**: Modify terrain parameters dynamically using the **ImGUI** interface.
+- **Customizable Settings**: Adjust resolution, noise parameters, and rendering modes in real-time.
+- **Camera Controls**: Navigate the terrain using a built-in camera system.
 
-## Usage
+---
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Gyakobo/Terrain-Generation.git
-   cd Terrain-Generation
+## Prerequisites
 
+Ensure your system has the following installed:
+
+- A C++ compiler (e.g., GCC, Clang, or MSVC)
+- OpenGL 3.3+ compatible GPU and drivers
+- [GLEW](http://glew.sourceforge.net/): OpenGL Extension Wrangler
+- [GLFW](https://www.glfw.org/): For creating windows and handling input
+- [ImGUI](https://github.com/ocornut/imgui): For user interface
+- [GLM](https://github.com/g-truc/glm): For mathematics (optional, but recommended)
+
+---
+
+## Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Gyakobo/Terrain-Generation.git
+cd Terrain-Generation
+```
+
+### 2. Build the Project
+
+For Linux users you can run the program with the following:
+
+```bash 
+sudo g++ -std=c++11 main.cpp src/*.cpp src/imgui/* -o main -lGLU -lglfw3 -lX11 -lXxf86vm -lXrandr -lpthread -lXi -ldl -lXinerama -lXcursor -lGL -lGLEW 
+
+# If the previous command didn't work out then please run the following where I specifically manually added all the necessary IMGUI dependencies
+sudo g++ -std=c++11 main.cpp src/*.cpp src/imgui/imgui.cpp src/imgui/imgui_impl_glfw_gl3.cpp src/imgui/imgui_demo.cpp src/imgui/imgui_draw.cpp -o main -lGLU -lglfw3 -lX11 -lXxf86vm -lXrandr -lpthread -lXi -ldl -lXinerama -lXcursor -lGL -lGLEW 
+
+sudo ./main
+```
+
+    - Alternatively, please just run the [build.sh](./build.sh) after you go it executable permissions: `sudo chmod +x build.sh`
+
+For Windows users you should just:
+
+```bash
+mkdir build && cd build
+cmake ..
+make
+```
+
+## Methodology
+
+So this should be the simple usage criteria:
+
+* **Modify Terrain Parameters**: Use the ImGUI panel to adjust noise parameters (scale, octaves, persistence) or change rendering options.
+
+* Camera Controls:
+    * W/A/S/D: Move forward/left/backward/right.
+    * Mouse Drag: Rotate the camera.
+    * Scroll: Zoom in/out.
+
+* Export Screenshots: Save a snapshot of the current view (if implemented).
+
+## Project Structure
+
+```
+Terrain-Generation/
+├── src/                # Source code
+│   ├── main.cpp        # Entry point
+│   ├── renderer.cpp    # Rendering logic
+│   ├── terrain.cpp     # Terrain generation logic
+│   ├── shaders/        # GLSL shader files
+├── include/            # Header files
+├── resources/          # Textures, configurations
+├── CMakeLists.txt      # Build configuration
+└── README.md           # Project documentation
+```
 
 ## License
 MIT
