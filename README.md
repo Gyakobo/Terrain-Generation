@@ -1,5 +1,12 @@
 # Terrain-Generation
 
+![image](https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white)
+![image](https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)
+![image](https://img.shields.io/badge/CMake-064F8C?style=for-the-badge&logo=cmake&logoColor=white)
+![image](https://img.shields.io/badge/windows%20terminal-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white)
+
+Author: [Andrew Gyakobo](https://github.com/Gyakobo)
+
 A procedural terrain generation project built with **C++** and modern OpenGL. This repository implements noise-based algorithms and real-time rendering techniques to create realistic and visually stunning terrains. The project leverages **ImGUI** for an interactive user interface, **GLEW** for OpenGL extensions, and **GLSL** for shader-based rendering.
 
 ---
