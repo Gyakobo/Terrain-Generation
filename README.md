@@ -11,6 +11,8 @@ A procedural terrain generation project built with **C++** and modern OpenGL. Th
 
 ---
 
+https://github.com/user-attachments/assets/53823b99-ff5b-48bf-9746-29d1130756fa
+
 ## Features
 
 - **Noise-Based Terrain**: Implements Perlin or other procedural noise algorithms for smooth, natural terrains.
