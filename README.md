@@ -101,8 +101,10 @@ Terrain-Generation/
 - [ ] Add support for advanced noise algorithms like Simplex or Worley noise
 - [ ] Implement texture mapping for more detailed terrains
 - [ ] Add water rendering with reflection/refraction effects
-- [ ] Simulate dynamic lighting and shadows
+- [x] Simulate dynamic lighting and shadows
 - [ ] Support terrain export as heightmaps or 3D models
+- [ ] Add more textures of maybed even a height-map
+- [ ] Generate texture wrappers(images) based on the features of the shape
 
 ## License
 MIT
